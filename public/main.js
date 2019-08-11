@@ -32,7 +32,7 @@ icon.set('icon', 'partly-cloudy-day')
 function setWeatherData(data, place) {
     locationElement.textContent = place
     statusElement.textContent = data.summary
-    tempElement.textContent = data.summary
+    tempElement.textContent = data.temperature
     windElement.textContent = data.windSpeed
     precElement.textContent = data.precipProbability * 100 + '%'
     icon.set('icon', data.icon)
