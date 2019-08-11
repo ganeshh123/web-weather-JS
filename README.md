@@ -10,5 +10,5 @@ Uses DarkSky API, and Google Places API
 - Run the command "npm start devStart" from the console.
 
 
-Thanks to Web Dev Simplified for the cool tutorial :)
+Thanks to Web Dev Simplified for the cool tutorial :)  
 https://www.youtube.com/channel/UCFbNIlppjAuEX4znoulh0Cw/videos
