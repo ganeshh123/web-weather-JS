@@ -1,0 +1,93 @@
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+a {
+    display: block;
+}
+
+.mainContent {
+    max-width: 500px;
+    width: 80vw;
+    margin: auto;
+}
+
+.header {
+    width: 200px;
+    margin: auto;
+}
+
+.icon-container,
+#icon {
+    width: 100px;
+    margin: auto;
+}
+
+.contentBox {
+    width: 300px;
+    margin: auto;
+}
+
+.weather-info,
+.status,
+.location,
+.weather-details,
+.detail,
+.inputBox {
+    width: 300px;
+    margin: auto;
+    text-align: center;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.status {
+    font-size: 32px;
+    font-weight: 900;
+}
+
+.location {
+    font-size: 18px;
+}
+
+.citySearch {
+    width: 200px;
+    margin: auto;
+}
+
+.detail {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 18px;
+}
+
+.value {
+    font-size: 24px;
+}
+
+::-webkit-input-placeholder {
+    text-align: center;
+}
+
+ :-moz-placeholder {
+    /* Firefox 18- */
+    text-align: center;
+}
+
+ ::-moz-placeholder {
+    /* Firefox 19+ */
+    text-align: center;
+}
+
+ :-ms-input-placeholder {
+    text-align: center;
+}
