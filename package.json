@@ -4,7 +4,8 @@
     "description": "JavaScript Weather App",
     "main": "index.js",
     "scripts": {
-        "devStart": "nodemon server.js"
+        "start": "nodemon server.js",
+        "build": "webpack"
     },
     "repository": {
         "type": "git",
