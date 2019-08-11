@@ -18,6 +18,6 @@ app.post('/weather', (req, res) => {
     }).then(data => res.json(data.data.currently))
 })
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('Server Started')
 })
