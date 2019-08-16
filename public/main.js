@@ -36,6 +36,39 @@ function setWeatherData(data, place) {
     windElement.textContent = data.windSpeed
     precElement.textContent = data.precipProbability * 100 + '%'
     icon.set('icon', data.icon)
+    switch (data.icon) {
+        case "clear-day":
+            document.body.style.background = "url('img/clear.jpg')";
+            break;
+        case "clear-night":
+            document.body.style.background = "url('img/night.jpg')";
+            break;
+        case "rain":
+            document.body.style.background = "url('img/rain.jpg')";
+            break;
+        case "snow":
+            document.body.style.background = "url('img/snow.jpg')";
+            break;
+        case "sleet":
+            document.body.style.background = "url('img/snow.jpg')";
+            break;
+        case "wind":
+            document.body.style.background = "url('img/wind.jpg')";
+            break;
+        case "fog":
+            document.body.style.background = "url('img/fog.jpg')";
+            break;
+        case "cloudy":
+            document.body.style.background = "url('img/cloud.jpg')";
+            break;
+        case "partly-cloudy-day":
+            document.body.style.background = "url('img/cloud.jpg')";
+            break;
+        case "partly-cloudy-night":
+            document.body.style.background = "url('img/night.jpg')";
+            break;
+
+    }
     icon.play()
 
 }

@@ -1,15 +1,31 @@
 body {
     font-family: 'Nunito', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 a {
     display: block;
 }
 
+hr {
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
 .mainContent {
     max-width: 500px;
-    width: 80vw;
+    width: 90vw;
     margin: auto;
+    background-color: #ffffff;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 20px;
+    position: relative;
+    height: 650px;
 }
 
 .header {
@@ -40,11 +56,11 @@ a {
 }
 
 .footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
+    position: absolute;
+    bottom: 2;
     text-align: center;
     width: 100%;
+    left: 0;
 }
 
 .status {
