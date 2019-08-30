@@ -1,8 +1,10 @@
 body {
     font-family: 'Nunito', sans-serif;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 }
 
 a {
@@ -19,18 +21,18 @@ hr {
 .mainContent {
     max-width: 500px;
     width: 90vw;
-    margin: auto;
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.75);
     border-radius: 5px;
-    margin-top: 10px;
     padding: 20px;
-    position: relative;
-    height: 650px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .header {
-    width: 200px;
-    margin: auto;
+    width: 100%;
 }
 
 .icon-container,
@@ -40,8 +42,11 @@ hr {
 }
 
 .contentBox {
-    width: 300px;
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
 }
 
 .weather-info,
@@ -51,16 +56,12 @@ hr {
 .detail,
 .inputBox {
     width: 300px;
-    margin: auto;
     text-align: center;
 }
 
 .footer {
-    position: absolute;
-    bottom: 2;
     text-align: center;
     width: 100%;
-    left: 0;
 }
 
 .status {
@@ -106,4 +107,26 @@ hr {
 
  :-ms-input-placeholder {
     text-align: center;
+}
+
+@media only screen and (max-width: 500px) {
+    .icon-container,
+    #icon {
+        width: 75px;
+    }
+    .status {
+        font-size: 20px;
+    }
+    .location {
+        font-size: 15px;
+    }
+    .title {
+        font-size: 15px;
+    }
+    .value {
+        font-size: 20px;
+    }
+    .footer {
+        font-size: 12px;
+    }
 }
