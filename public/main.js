@@ -32,8 +32,8 @@ icon.set('icon', 'partly-cloudy-day')
 function setWeatherData(data, place) {
     locationElement.textContent = place
     statusElement.textContent = data.summary
-    tempElement.textContent = data.temperature
-    windElement.textContent = data.windSpeed
+    tempElement.textContent = data.temperature + " ℃ | " + Math.round(convertTemp(data.temperature) * 100) / 100 + " ℉";
+    windElement.textContent = data.windSpeed + " kph | " + Math.round(convertSpeed(data.windSpeed) * 100) / 100 + " mph"
     precElement.textContent = data.precipProbability * 100 + '%'
     icon.set('icon', data.icon)
     switch (data.icon) {
@@ -70,5 +70,13 @@ function setWeatherData(data, place) {
 
     }
     icon.play()
+
+    function convertTemp(input) {
+        return (input * 9 / 5) + 32;
+    }
+
+    function convertSpeed(input) {
+        return input / 1.609344;
+    }
 
 }
