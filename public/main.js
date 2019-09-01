@@ -30,13 +30,16 @@ const precElement = document.querySelector('[data-prec')
 icon.set('icon', 'partly-cloudy-day')
 
 function setWeatherData(data, place) {
+
+    currently = data.currently
+
     locationElement.textContent = place
-    statusElement.textContent = data.summary
-    tempElement.textContent = data.temperature + " ℃ | " + Math.round(convertTemp(data.temperature) * 100) / 100 + " ℉";
-    windElement.textContent = data.windSpeed + " kph | " + Math.round(convertSpeed(data.windSpeed) * 100) / 100 + " mph"
-    precElement.textContent = data.precipProbability * 100 + '%'
-    icon.set('icon', data.icon)
-    switch (data.icon) {
+    statusElement.textContent = currently.summary;
+    tempElement.textContent = currently.temperature + " ℃ | " + Math.round(convertTemp(currently.temperature) * 100) / 100 + " ℉";
+    windElement.textContent = currently.windSpeed + " kph | " + Math.round(convertSpeed(currently.windSpeed) * 100) / 100 + " mph"
+    precElement.textContent = currently.precipProbability * 100 + '%'
+    icon.set('icon', currently.icon)
+    switch (currently.icon) {
         case "clear-day":
             document.body.style.background = "url('img/clear.jpg')";
             break;
@@ -77,6 +80,14 @@ function setWeatherData(data, place) {
 
     function convertSpeed(input) {
         return input / 1.609344;
+    }
+
+    function timeConvert(t) {
+        var dt = new Date(t * 1000);
+        var hr = dt.getHours();
+        var m = "0" + dt.getMinutes();
+        var s = "0" + dt.getSeconds();
+        return hr + ':' + m.substr(-2);
     }
 
 }
