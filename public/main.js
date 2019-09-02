@@ -1,10 +1,25 @@
 const searchElement = document.querySelector('[data-city-search]')
 const searchBox = new google.maps.places.SearchBox(searchElement)
+var timeData = {};
 searchBox.addListener('places_changed', () => {
     const place = searchBox.getPlaces()[0]
     if (place == null) return
     const latitude = place.geometry.location.lat()
     const longitude = place.geometry.location.lng()
+    fetch('/time', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            latitude: latitude,
+            longitude: longitude
+        })
+    }).then(res => res.json()).then(data => {
+        timeData = data;
+        console.log(timeData)
+    })
     fetch('/weather', {
         method: 'POST',
         headers: {
@@ -32,12 +47,13 @@ icon.set('icon', 'partly-cloudy-day')
 function setWeatherData(data, place) {
 
     currently = data.currently
+    time = timeData.timestamp - 3600;
 
-    locationElement.textContent = place
+    locationElement.textContent = place + " - " + timeConvert(time);
     statusElement.textContent = currently.summary;
     tempElement.textContent = currently.temperature + " ℃ | " + Math.round(convertTemp(currently.temperature) * 100) / 100 + " ℉";
     windElement.textContent = currently.windSpeed + " kph | " + Math.round(convertSpeed(currently.windSpeed) * 100) / 100 + " mph"
-    precElement.textContent = currently.precipProbability * 100 + '%'
+    precElement.textContent = Math.round(currently.precipProbability * 100) + '%'
     icon.set('icon', currently.icon)
     switch (currently.icon) {
         case "clear-day":
