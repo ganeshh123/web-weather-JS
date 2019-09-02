@@ -32,7 +32,7 @@ searchBox.addListener('places_changed', () => {
         })
     }).then(res => res.json()).then(data => {
         console.log(data)
-        setWeatherData(data, place.formatted_address)
+        setWeatherData(data, place)
     })
 })
 
@@ -42,6 +42,8 @@ const statusElement = document.querySelector('[data-status')
 const tempElement = document.querySelector('[data-temp')
 const windElement = document.querySelector('[data-wind')
 const precElement = document.querySelector('[data-prec')
+const timeElement = document.querySelector('[data-time')
+const dateElement = document.querySelector('[data-date')
 icon.set('icon', 'partly-cloudy-day')
 
 function setWeatherData(data, place) {
@@ -49,7 +51,12 @@ function setWeatherData(data, place) {
     currently = data.currently
     time = timeData.timestamp - 3600;
 
-    locationElement.textContent = place + " - " + timeConvert(time);
+    timeElement.style.display = "block";
+    dateElement.style.display = "block";
+
+    locationElement.textContent = place.formatted_address;
+    timeElement.textContent = timeConvert(time);
+    dateElement.textContent = dateConvert(time);
     statusElement.textContent = currently.summary;
     tempElement.textContent = currently.temperature + " ℃ | " + Math.round(convertTemp(currently.temperature) * 100) / 100 + " ℉";
     windElement.textContent = currently.windSpeed + " kph | " + Math.round(convertSpeed(currently.windSpeed) * 100) / 100 + " mph"
@@ -104,6 +111,21 @@ function setWeatherData(data, place) {
         var m = "0" + dt.getMinutes();
         var s = "0" + dt.getSeconds();
         return hr + ':' + m.substr(-2);
+    }
+
+    function dateConvert(t){
+        var date = new Date(t * 1000);
+
+        var weekday = new Array(7);
+        weekday[0] = "Sunday";
+        weekday[1] = "Monday";
+        weekday[2] = "Tuesday";
+        weekday[3] = "Wednesday";
+        weekday[4] = "Thursday";
+        weekday[5] = "Friday";
+        weekday[6] = "Saturday";
+
+        return weekday[date.getDay()] + "-" + date.getDate() + "-" + (date.getMonth()+1).toString() + "-" + date.getFullYear(); 
     }
 
 }

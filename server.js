@@ -27,7 +27,6 @@ app.post('/time', (req, res) => {
         url: timezonedb_url,
         responseType: 'json'
     }).then(response => {
-        console.log(response.data);
         res.json(response.data);
     })
 
