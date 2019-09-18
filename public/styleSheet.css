@@ -53,11 +53,36 @@ hr {
     width: 100%;
 }
 
+#localInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+#containerDateTime{
+    font-size: 16px;
+    font-weight: bolder;
+    margin: 2px 0px 2px 0px;
+    width: auto;
+    margin: auto;
+}
+
 #time, #date{
     display: none;
-    font-size: 20px;
-    margin-top: 0px;
+    margin-top: 5px;
     margin-bottom: 5px;
+    margin-left: 2px;
+}
+
+#time{
+    width: auto;
+}
+
+#date{
+    width: auto;
 }
 
 .weather-info,

@@ -44,6 +44,7 @@ const windElement = document.querySelector('[data-wind')
 const precElement = document.querySelector('[data-prec')
 const timeElement = document.querySelector('[data-time')
 const dateElement = document.querySelector('[data-date')
+const localInfoElement = document.querySelector('[data-localInfo')
 icon.set('icon', 'partly-cloudy-day')
 
 function setWeatherData(data, place) {
@@ -51,11 +52,14 @@ function setWeatherData(data, place) {
     currently = data.currently
     time = timeData.timestamp - 3600;
 
-    timeElement.style.display = "block";
-    dateElement.style.display = "block";
+    timeElement.style.display = "inline-block";
+    dateElement.style.display = "inline-block";
+    localInfoElement.style.backgroundColor = "rgba(0,0,0,0.1)";
+    //localInfoElement.style.margin = "0px 0px 10px 0px";
+    
 
     locationElement.textContent = place.formatted_address;
-    timeElement.textContent = timeConvert(time);
+    timeElement.textContent = timeConvert(time) + " |";
     dateElement.textContent = dateConvert(time);
     statusElement.textContent = currently.summary;
     tempElement.textContent = currently.temperature + " ℃ | " + Math.round(convertTemp(currently.temperature) * 100) / 100 + " ℉";
@@ -117,15 +121,15 @@ function setWeatherData(data, place) {
         var date = new Date(t * 1000);
 
         var weekday = new Array(7);
-        weekday[0] = "Sunday";
-        weekday[1] = "Monday";
-        weekday[2] = "Tuesday";
-        weekday[3] = "Wednesday";
-        weekday[4] = "Thursday";
-        weekday[5] = "Friday";
-        weekday[6] = "Saturday";
+        weekday[0] = "Sun";
+        weekday[1] = "Mon";
+        weekday[2] = "Tue";
+        weekday[3] = "Wed";
+        weekday[4] = "Thu";
+        weekday[5] = "Fri";
+        weekday[6] = "Sat";
 
-        return weekday[date.getDay()] + "-" + date.getDate() + "-" + (date.getMonth()+1).toString() + "-" + date.getFullYear(); 
+        return weekday[date.getDay()] + " " + date.getDate() + "-" + (date.getMonth()+1).toString() + "-" + date.getFullYear(); 
     }
 
 }
