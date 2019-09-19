@@ -50,17 +50,22 @@ icon.set('icon', 'partly-cloudy-day')
 function setWeatherData(data, place) {
 
     currently = data.currently
+    timeString = timeData.formatted
+    console.log(timeString)
+    console.log(timeString.length)
     time = timeData.timestamp - 3600;
 
     timeElement.style.display = "inline-block";
     dateElement.style.display = "inline-block";
     localInfoElement.style.backgroundColor = "rgba(0,0,0,0.1)";
     //localInfoElement.style.margin = "0px 0px 10px 0px";
-    
+
 
     locationElement.textContent = place.formatted_address;
-    timeElement.textContent = timeConvert(time) + " |";
-    dateElement.textContent = dateConvert(time);
+    //timeElement.textContent = timeConvert(time) + " |";
+    //dateElement.textContent = dateConvert(time);
+    timeElement.textContent = timeString.slice(11, 16) + " |"
+    dateElement.textContent = timeString.slice(0, 10)
     statusElement.textContent = currently.summary;
     tempElement.textContent = currently.temperature + " ℃ | " + Math.round(convertTemp(currently.temperature) * 100) / 100 + " ℉";
     windElement.textContent = currently.windSpeed + " kph | " + Math.round(convertSpeed(currently.windSpeed) * 100) / 100 + " mph"
@@ -117,7 +122,7 @@ function setWeatherData(data, place) {
         return hr + ':' + m.substr(-2);
     }
 
-    function dateConvert(t){
+    function dateConvert(t) {
         var date = new Date(t * 1000);
 
         var weekday = new Array(7);
@@ -129,7 +134,7 @@ function setWeatherData(data, place) {
         weekday[5] = "Fri";
         weekday[6] = "Sat";
 
-        return weekday[date.getDay()] + " " + date.getDate() + "-" + (date.getMonth()+1).toString() + "-" + date.getFullYear(); 
+        return weekday[date.getDay()] + " " + date.getDate() + "-" + (date.getMonth() + 1).toString() + "-" + date.getFullYear();
     }
 
 }
