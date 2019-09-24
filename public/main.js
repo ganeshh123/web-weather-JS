@@ -47,6 +47,7 @@ const precElement = document.querySelector('[data-prec')
 const timeElement = document.querySelector('[data-time')
 const dateElement = document.querySelector('[data-date')
 const localInfoElement = document.querySelector('[data-localInfo')
+const alertBoxElement = document.querySelector('[data-alert')
 icon.set('icon', 'partly-cloudy-day')
 
 function setWeatherData(data, place) {
@@ -98,6 +99,15 @@ function setWeatherData(data, place) {
             document.body.style.background = "url('img/night.jpg')";
             break;
     }
+
+    if (data.alerts != null) {
+        console.log(data.alerts[0].title);
+        alertBoxElement.style.display = "block";
+        alertBoxElement.textContent = data.alerts[0].title;
+    } else {
+        alertBoxElement.style.display = "none";
+    }
+
     icon.play()
 }
 

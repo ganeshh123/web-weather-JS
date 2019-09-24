@@ -1,3 +1,27 @@
+/* Fade-In Animation */
+
+* {
+    animation: opac 0.8s
+}
+
+@keyframes opac {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
+.alert,
+.notice,
+.notification {
+    color: #fff !important;
+    background-color: #265728 !important;
+    width: 100%;
+    border-radius: 0px;
+}
+
 body {
     font-family: 'Nunito', sans-serif;
     display: flex;
@@ -7,9 +31,7 @@ body {
     height: 100vh;
 }
 
-a {
-    
-}
+a {}
 
 hr {
     max-width: 80%;
@@ -35,7 +57,7 @@ hr {
     width: 100%;
 }
 
-.header h2{
+.header h2 {
     text-align: center;
 }
 
@@ -53,7 +75,19 @@ hr {
     width: 100%;
 }
 
-#localInfo{
+#alert {
+    display: none;
+    background-color: rgba(255, 255, 0, 0.4);
+    color: rgb(214, 8, 8);
+    border-radius: 5px;
+    padding: 5px;
+    margin: 0px 0px 5px 0px;
+    font-size: 15px;
+    font-weight: 900;
+    text-align: center;
+}
+
+#localInfo {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -63,7 +97,8 @@ hr {
     padding: 5px;
     width: 90%;
 }
-#containerDateTime{
+
+#containerDateTime {
     font-size: 16px;
     font-weight: bolder;
     margin: 2px 0px 2px 0px;
@@ -71,18 +106,19 @@ hr {
     margin: auto;
 }
 
-#time, #date{
+#time,
+#date {
     display: none;
     margin-top: 5px;
     margin-bottom: 5px;
     margin-left: 2px;
 }
 
-#time{
+#time {
     width: auto;
 }
 
-#date{
+#date {
     width: auto;
 }
 
