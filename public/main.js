@@ -2,6 +2,8 @@ const searchElement = document.querySelector('[data-city-search]')
 const searchBox = new google.maps.places.SearchBox(searchElement)
 var timeData = {};
 
+// Select a location, and then get Weather and Time Data 
+
 searchBox.addListener('places_changed', () => {
     const place = searchBox.getPlaces()[0]
     if (place == null) return
@@ -38,6 +40,8 @@ searchBox.addListener('places_changed', () => {
     })
 })
 
+// Objects for all the elements
+
 const icon = new Skycons({ color: '#222' })
 const locationElement = document.querySelector('[data-location')
 const statusElement = document.querySelector('[data-status')
@@ -49,6 +53,8 @@ const dateElement = document.querySelector('[data-date')
 const localInfoElement = document.querySelector('[data-localInfo')
 const alertBoxElement = document.querySelector('[data-alert')
 icon.set('icon', 'partly-cloudy-day')
+
+// Sort and Display the Weather Data
 
 function setWeatherData(data, place) {
 
@@ -116,6 +122,8 @@ function setWeatherData(data, place) {
     icon.play()
 }
 
+// Sort and Display the Time Data 
+
 function setTimeData(timeData) {
     timeString = timeData.formatted
     console.log(timeString)
@@ -129,15 +137,19 @@ function setTimeData(timeData) {
 
 }
 
-
+// Convert from Celcius to Fahrenheit
 
 function convertTemp(input) {
     return (input * 9 / 5) + 32;
 }
 
+// Convert from km/h to mph
+
 function convertSpeed(input) {
     return input / 1.609344;
 }
+
+// Convert Unix Time to a readable string
 
 function timeConvert(t) {
     var dt = new Date(t * 1000);
@@ -146,6 +158,8 @@ function timeConvert(t) {
     var s = "0" + dt.getSeconds();
     return hr + ':' + m.substr(-2);
 }
+
+// Convert Unix Date to a readable string
 
 function dateConvert(t) {
     var date = new Date(t * 1000);
@@ -160,8 +174,4 @@ function dateConvert(t) {
     weekday[6] = "Sat";
 
     return weekday[date.getDay()] + " " + date.getDate() + "-" + (date.getMonth() + 1).toString() + "-" + date.getFullYear();
-}
-
-function openLink(url) {
-    window.open(url, '_blank');
 }
