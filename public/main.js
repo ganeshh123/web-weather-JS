@@ -103,7 +103,12 @@ function setWeatherData(data, place) {
     if (data.alerts != null) {
         console.log(data.alerts[0].title);
         alertBoxElement.style.display = "block";
+        alertBoxElement.style.cursor = "pointer";
         alertBoxElement.textContent = data.alerts[0].title;
+        console.log(data.alerts[0].uri)
+        alertBoxElement.onclick = function() {
+            window.open(data.alerts[0].uri, '_blank');;
+        }
     } else {
         alertBoxElement.style.display = "none";
     }
@@ -155,4 +160,8 @@ function dateConvert(t) {
     weekday[6] = "Sat";
 
     return weekday[date.getDay()] + " " + date.getDate() + "-" + (date.getMonth() + 1).toString() + "-" + date.getFullYear();
+}
+
+function openLink(url) {
+    window.open(url, '_blank');
 }
