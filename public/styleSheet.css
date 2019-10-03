@@ -29,6 +29,8 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color: #000000;
+    /*For debugging, remove after*/
 }
 
 a {}
@@ -164,23 +166,71 @@ hr {
     font-size: 24px;
 }
 
-::-webkit-input-placeholder {
+.controls button {
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #ffffff;
+    border-radius: 5px;
+    font-size: 30px;
+    padding: 5px 10px 5px 10px;
+}
+
+
+/*Forecast Element Styling */
+
+#forecast {
+    width: 99%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.forecastRow {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    padding: 5px 5px 5px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-width: 80%;
+    margin: 5px 0px 5px 0px;
+}
+
+.forecastLeft,
+.forecastRight {
+    width: 45%;
+}
+
+.forecastRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
 }
 
- :-moz-placeholder {
-    /* Firefox 18- */
-    text-align: center;
+.forecastDay {
+    font-size: 20px;
 }
 
- ::-moz-placeholder {
-    /* Firefox 19+ */
-    text-align: center;
+.forecastNumbers {
+    display: flex;
+    justify-content: center;
 }
 
- :-ms-input-placeholder {
-    text-align: center;
+.forecastDataBlock {
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #ffffff;
+    padding: 5px 5px 5px 5px;
+    border-radius: 5px;
+    font-size: 18px;
+    margin: 2px 5px 2px 5px;
 }
+
+
+/*Mobile Styling */
 
 @media only screen and (max-width: 500px) {
     .icon-container,
@@ -202,4 +252,22 @@ hr {
     .footer {
         font-size: 12px;
     }
+}
+
+::-webkit-input-placeholder {
+    text-align: center;
+}
+
+ :-moz-placeholder {
+    /* Firefox 18- */
+    text-align: center;
+}
+
+ ::-moz-placeholder {
+    /* Firefox 19+ */
+    text-align: center;
+}
+
+ :-ms-input-placeholder {
+    text-align: center;
 }
