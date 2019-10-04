@@ -28,7 +28,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #000000;
     /*For debugging, remove after*/
 }
@@ -53,6 +53,7 @@ hr {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    margin: 20px 10px 20px 10px;
 }
 
 .header {
@@ -185,6 +186,7 @@ hr {
     justify-content: flex-start;
     align-items: center;
     margin-bottom: 10px;
+    display: none;
 }
 
 .forecastRow {
@@ -194,7 +196,7 @@ hr {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    min-width: 80%;
+    width: 80%;
     margin: 5px 0px 5px 0px;
 }
 
@@ -209,6 +211,7 @@ hr {
     justify-content: center;
     align-items: center;
     text-align: center;
+    height: 71px;
 }
 
 .forecastDay {
@@ -227,6 +230,10 @@ hr {
     border-radius: 5px;
     font-size: 18px;
     margin: 2px 5px 2px 5px;
+}
+
+.forecastDataBlock i{
+    font-size: 15px;
 }
 
 

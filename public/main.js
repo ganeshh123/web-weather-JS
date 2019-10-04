@@ -37,6 +37,7 @@ searchBox.addListener('places_changed', () => {
     }).then(res => res.json()).then(data => {
         console.log(data)
         setWeatherData(data, place)
+        renderWeeklyForecast(data);
     })
 })
 
@@ -52,6 +53,8 @@ const timeElement = document.querySelector('[data-time')
 const dateElement = document.querySelector('[data-date')
 const localInfoElement = document.querySelector('[data-localInfo')
 const alertBoxElement = document.querySelector('[data-alert')
+const forecastElement = document.querySelector('[data-forecast')
+console.log(forecastElement);
 icon.set('icon', 'partly-cloudy-day')
 
 // Sort and Display the Weather Data
@@ -105,6 +108,8 @@ function setWeatherData(data, place) {
             document.body.style.background = "url('img/night.jpg')";
             break;
     }
+
+    document.body.style.backgroundSize = "100% 100%";
 
     if (data.alerts != null) {
         console.log(data.alerts[0].title);
@@ -165,13 +170,87 @@ function dateConvert(t) {
     var date = new Date(t * 1000);
 
     var weekday = new Array(7);
-    weekday[0] = "Sun";
-    weekday[1] = "Mon";
-    weekday[2] = "Tue";
-    weekday[3] = "Wed";
-    weekday[4] = "Thu";
-    weekday[5] = "Fri";
-    weekday[6] = "Sat";
+    weekday[0] = "Sunday";
+    weekday[1] = "Monday";
+    weekday[2] = "Tuesday";
+    weekday[3] = "Wednesday";
+    weekday[4] = "Thursday";
+    weekday[5] = "Friday";
+    weekday[6] = "Saturday";
 
     return weekday[date.getDay()] + " " + date.getDate() + "-" + (date.getMonth() + 1).toString() + "-" + date.getFullYear();
+}
+
+function getDay(t){
+    return dateConvert(t).split(" ")[0];
+}
+
+function renderWeeklyForecast(data){
+    daily = data.daily.data;
+    
+    //console.log(daily);
+
+    daily.forEach( function(day){
+        //console.log(day.summary + day.precipProbability);
+        console.log(getDay(day.time));
+        //var forecastElement = document.getElementById("forecast");
+            var forecastRowElement = document.createElement("div");
+            forecastRowElement.className = "forecastRow";
+
+                var forecastLeftElement = document.createElement("div");
+                forecastLeftElement.className = "forecastLeft";
+
+                    var forecastDayElement = document.createElement("div");
+                    forecastDayElement.className = "forecastDay";
+
+                        forecastDayElement.appendChild(document.createTextNode(getDay(day.time)));
+
+                    forecastLeftElement.appendChild(forecastDayElement);
+
+                    var forecastNumbersElement = document.createElement("div");
+                    forecastNumbersElement.className = "forecastNumbers";
+
+                        var forecastDataBlockElement = document.createElement("div");
+                        forecastDataBlockElement.className = "forecastDataBlock";
+
+                            var forecastTemperatureIconElement = document.createElement("i");
+
+                                forecastTemperatureIconElement.className = "fas fa-thermometer-half";
+                                forecastTemperatureIconElement.appendChild(document.createTextNode('\xa0' + Math.round((day.temperatureLow + day.temperatureHigh)/2) + ' ℃'));
+
+                            forecastDataBlockElement.appendChild(forecastTemperatureIconElement);
+
+                        forecastNumbersElement.appendChild(forecastDataBlockElement);
+
+
+
+                        var forecastDataBlockElement2 = document.createElement("div");
+                        forecastDataBlockElement2.className = "forecastDataBlock";
+
+                            var forecastRainIconElement = document.createElement("i");
+
+                                forecastRainIconElement.className = "fas fa-cloud-rain";
+                                forecastRainIconElement.appendChild(document.createTextNode('\xa0' + Math.round(day.precipProbability)*100 + ' %'));
+
+                            forecastDataBlockElement2.appendChild(forecastRainIconElement);
+
+                        forecastNumbersElement.appendChild(forecastDataBlockElement2);
+
+                    forecastLeftElement.appendChild(forecastNumbersElement);
+
+                forecastRowElement.appendChild(forecastLeftElement);
+
+                var forecastRightElement = document.createElement("div");
+                forecastRightElement.className = "forecastRight";
+
+                    var forecastSummaryElement = document.createElement("div");
+                    forecastSummaryElement.appendChild(document.createTextNode(day.summary));
+                    forecastRightElement.appendChild(forecastSummaryElement);
+
+                forecastRowElement.appendChild(forecastRightElement);
+
+            forecastElement.appendChild(forecastRowElement);
+            forecastElement.style.display = "flex";
+
+    })
 }
