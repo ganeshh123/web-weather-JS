@@ -247,18 +247,19 @@ function renderWeeklyForecast(data){
                         forecastNumbersElement.appendChild(forecastDataBlockElement);
 
 
+                    if(day.precipProbability > 0.2){
+                            var forecastDataBlockElement2 = document.createElement("div");
+                            forecastDataBlockElement2.className = "forecastDataBlock";
 
-                        var forecastDataBlockElement2 = document.createElement("div");
-                        forecastDataBlockElement2.className = "forecastDataBlock";
+                                var forecastRainIconElement = document.createElement("i");
 
-                            var forecastRainIconElement = document.createElement("i");
+                                    forecastRainIconElement.className = "fas fa-cloud-rain";
+                                    
+                                forecastDataBlockElement2.appendChild(forecastRainIconElement);
+                                forecastDataBlockElement2.appendChild(document.createTextNode('\xa0'));
 
-                                forecastRainIconElement.className = "fas fa-cloud-rain";
-                                
-                            forecastDataBlockElement2.appendChild(forecastRainIconElement);
-                            forecastDataBlockElement2.appendChild(document.createTextNode('\xa0' + Math.round(day.precipProbability)*100 + ' %'));
-
-                        forecastNumbersElement.appendChild(forecastDataBlockElement2);
+                            forecastNumbersElement.appendChild(forecastDataBlockElement2);
+                    }
 
                     forecastLeftElement.appendChild(forecastNumbersElement);
 
