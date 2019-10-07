@@ -167,6 +167,11 @@ hr {
     font-size: 24px;
 }
 
+.controls{
+    display: none;
+    margin-bottom: 10px;
+}
+
 .controls button {
     background-color: rgba(0, 0, 0, 0.75);
     color: #ffffff;
@@ -230,10 +235,10 @@ hr {
     border-radius: 5px;
     font-size: 18px;
     margin: 2px 5px 2px 5px;
+    font-size: 15px;
 }
 
 .forecastDataBlock i{
-    font-size: 15px;
 }
 
 
@@ -259,6 +264,20 @@ hr {
     .footer {
         font-size: 12px;
     }
+    
+    .forecastDay {
+        font-size: 14px;
+    }
+
+    .forecastDataBlock {
+        font-size: 10px;
+    }
+
+
+    .forecastRight div{
+        font-size: 12px;
+    }
+    
 }
 
 ::-webkit-input-placeholder {

@@ -2,6 +2,9 @@ const searchElement = document.querySelector('[data-city-search]')
 const searchBox = new google.maps.places.SearchBox(searchElement)
 var timeData = {};
 
+// Toggles
+var forecastOpened = false;
+
 // Select a location, and then get Weather and Time Data 
 
 searchBox.addListener('places_changed', () => {
@@ -37,7 +40,6 @@ searchBox.addListener('places_changed', () => {
     }).then(res => res.json()).then(data => {
         console.log(data)
         setWeatherData(data, place)
-        renderWeeklyForecast(data);
     })
 })
 
@@ -54,12 +56,17 @@ const dateElement = document.querySelector('[data-date')
 const localInfoElement = document.querySelector('[data-localInfo')
 const alertBoxElement = document.querySelector('[data-alert')
 const forecastElement = document.querySelector('[data-forecast')
-console.log(forecastElement);
+const controlPanel = document.querySelector('[data-controls');
+const weekShowButtonElement = document.querySelector('[data-weekshow]')
+console.log(weekShowButtonElement);
 icon.set('icon', 'partly-cloudy-day')
 
 // Sort and Display the Weather Data
 
 function setWeatherData(data, place) {
+
+    forecastElement.style.display = "none";
+    forecastOpened = false;
 
     currently = data.currently
 
@@ -125,11 +132,18 @@ function setWeatherData(data, place) {
     }
 
     icon.play()
+
+    controlPanel.style.display = "block";
+
+
+    weekShowButtonElement.onclick = function() {
+        renderWeeklyForecast(data);;
+    }
 }
 
 // Sort and Display the Time Data 
 
-function setTimeData(timeData) {
+function setTimeData(timeData, data) {
     timeString = timeData.formatted
     console.log(timeString)
     console.log(timeString.length)
@@ -138,7 +152,7 @@ function setTimeData(timeData) {
     dateElement.style.display = "inline-block";
     localInfoElement.style.backgroundColor = "rgba(0,0,0,0.1)";
     timeElement.textContent = timeString.slice(11, 16) + " |"
-    dateElement.textContent = timeString.slice(0, 10)
+    dateElement.textContent = timeString.slice(0, 10);
 
 }
 
@@ -189,10 +203,11 @@ function renderWeeklyForecast(data){
     daily = data.daily.data;
     
     //console.log(daily);
-
+    console.log(forecastOpened);
+    forecastElement.innerHTML = '';
+    let dayCounter = 0;
     daily.forEach( function(day){
         //console.log(day.summary + day.precipProbability);
-        console.log(getDay(day.time));
         //var forecastElement = document.getElementById("forecast");
             var forecastRowElement = document.createElement("div");
             forecastRowElement.className = "forecastRow";
@@ -202,8 +217,17 @@ function renderWeeklyForecast(data){
 
                     var forecastDayElement = document.createElement("div");
                     forecastDayElement.className = "forecastDay";
-
-                        forecastDayElement.appendChild(document.createTextNode(getDay(day.time)));
+                        console.log(dayCounter);
+                        if(dayCounter == 0){
+                            forecastDayElement.appendChild(document.createTextNode("Today"));
+                            dayCounter ++;
+                        } else if(dayCounter == 1){
+                            forecastDayElement.appendChild(document.createTextNode("Tomorrow"));
+                            dayCounter ++;
+                        }
+                        else{
+                            forecastDayElement.appendChild(document.createTextNode(getDay(day.time)));
+                        }
 
                     forecastLeftElement.appendChild(forecastDayElement);
 
@@ -216,9 +240,9 @@ function renderWeeklyForecast(data){
                             var forecastTemperatureIconElement = document.createElement("i");
 
                                 forecastTemperatureIconElement.className = "fas fa-thermometer-half";
-                                forecastTemperatureIconElement.appendChild(document.createTextNode('\xa0' + Math.round((day.temperatureLow + day.temperatureHigh)/2) + ' ℃'));
 
                             forecastDataBlockElement.appendChild(forecastTemperatureIconElement);
+                            forecastDataBlockElement.appendChild(document.createTextNode('\xa0' + Math.round((day.temperatureLow + day.temperatureHigh)/2) + ' ℃'));
 
                         forecastNumbersElement.appendChild(forecastDataBlockElement);
 
@@ -230,9 +254,9 @@ function renderWeeklyForecast(data){
                             var forecastRainIconElement = document.createElement("i");
 
                                 forecastRainIconElement.className = "fas fa-cloud-rain";
-                                forecastRainIconElement.appendChild(document.createTextNode('\xa0' + Math.round(day.precipProbability)*100 + ' %'));
-
+                                
                             forecastDataBlockElement2.appendChild(forecastRainIconElement);
+                            forecastDataBlockElement2.appendChild(document.createTextNode('\xa0' + Math.round(day.precipProbability)*100 + ' %'));
 
                         forecastNumbersElement.appendChild(forecastDataBlockElement2);
 
@@ -250,7 +274,14 @@ function renderWeeklyForecast(data){
                 forecastRowElement.appendChild(forecastRightElement);
 
             forecastElement.appendChild(forecastRowElement);
-            forecastElement.style.display = "flex";
 
     })
+
+    if(forecastOpened === false){
+        forecastElement.style.display = "flex";
+        forecastOpened = true;
+    } else {
+        forecastElement.style.display = "none";
+        forecastOpened = false;
+    }
 }
