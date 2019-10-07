@@ -48,6 +48,7 @@ searchBox.addListener('places_changed', () => {
 const icon = new Skycons({ color: '#222' })
 const locationElement = document.querySelector('[data-location')
 const statusElement = document.querySelector('[data-status')
+const weatherDetailsElement = document.querySelector('[data-weather-details')
 const tempElement = document.querySelector('[data-temp')
 const windElement = document.querySelector('[data-wind')
 const precElement = document.querySelector('[data-prec')
@@ -133,6 +134,7 @@ function setWeatherData(data, place) {
 
     icon.play()
 
+    weatherDetailsElement.style.display = "block";
     controlPanel.style.display = "block";
 
 
@@ -195,90 +197,121 @@ function dateConvert(t) {
     return weekday[date.getDay()] + " " + date.getDate() + "-" + (date.getMonth() + 1).toString() + "-" + date.getFullYear();
 }
 
-function getDay(t){
+function getDay(t) {
     return dateConvert(t).split(" ")[0];
 }
 
-function renderWeeklyForecast(data){
+function renderWeeklyForecast(data) {
     daily = data.daily.data;
-    
+
     //console.log(daily);
     console.log(forecastOpened);
     forecastElement.innerHTML = '';
     let dayCounter = 0;
-    daily.forEach( function(day){
+    daily.forEach(function(day) {
         //console.log(day.summary + day.precipProbability);
         //var forecastElement = document.getElementById("forecast");
-            var forecastRowElement = document.createElement("div");
-            forecastRowElement.className = "forecastRow";
+        var forecastRowElement = document.createElement("div");
+        forecastRowElement.className = "forecastRow";
 
-                var forecastLeftElement = document.createElement("div");
-                forecastLeftElement.className = "forecastLeft";
+        var forecastLeftElement = document.createElement("div");
+        forecastLeftElement.className = "forecastLeft";
 
-                    var forecastDayElement = document.createElement("div");
-                    forecastDayElement.className = "forecastDay";
-                        console.log(dayCounter);
-                        if(dayCounter == 0){
-                            forecastDayElement.appendChild(document.createTextNode("Today"));
-                            dayCounter ++;
-                        } else if(dayCounter == 1){
-                            forecastDayElement.appendChild(document.createTextNode("Tomorrow"));
-                            dayCounter ++;
-                        }
-                        else{
-                            forecastDayElement.appendChild(document.createTextNode(getDay(day.time)));
-                        }
+        var forecastDayElement = document.createElement("div");
+        forecastDayElement.className = "forecastDay";
+        console.log(dayCounter);
+        if (dayCounter == 0) {
+            forecastDayElement.appendChild(document.createTextNode("Today"));
+            dayCounter++;
+        } else if (dayCounter == 1) {
+            forecastDayElement.appendChild(document.createTextNode("Tomorrow"));
+            dayCounter++;
+        } else {
+            forecastDayElement.appendChild(document.createTextNode(getDay(day.time)));
+        }
 
-                    forecastLeftElement.appendChild(forecastDayElement);
+        forecastLeftElement.appendChild(forecastDayElement);
 
-                    var forecastNumbersElement = document.createElement("div");
-                    forecastNumbersElement.className = "forecastNumbers";
+        var forecastNumbersElement = document.createElement("div");
+        forecastNumbersElement.className = "forecastNumbers";
 
-                        var forecastDataBlockElement = document.createElement("div");
-                        forecastDataBlockElement.className = "forecastDataBlock";
+        var forecastDataBlockElement = document.createElement("div");
+        forecastDataBlockElement.className = "forecastDataBlock";
 
-                            var forecastTemperatureIconElement = document.createElement("i");
+        var forecastTemperatureIconElement = document.createElement("i");
 
-                                forecastTemperatureIconElement.className = "fas fa-thermometer-half";
+        forecastTemperatureIconElement.className = "fas fa-thermometer-half";
 
-                            forecastDataBlockElement.appendChild(forecastTemperatureIconElement);
-                            forecastDataBlockElement.appendChild(document.createTextNode('\xa0' + Math.round(day.temperatureHigh) + ' ℃'));
+        forecastDataBlockElement.appendChild(forecastTemperatureIconElement);
+        forecastDataBlockElement.appendChild(document.createTextNode('\xa0' + Math.round(day.temperatureHigh) + ' ℃'));
 
-                        forecastNumbersElement.appendChild(forecastDataBlockElement);
+        forecastNumbersElement.appendChild(forecastDataBlockElement);
 
 
-                    if(day.precipProbability > 0.2){
-                            var forecastDataBlockElement2 = document.createElement("div");
-                            forecastDataBlockElement2.className = "forecastDataBlock";
+        var forecastDataBlockElement2 = document.createElement("div");
+        forecastDataBlockElement2.className = "forecastDataBlock";
 
-                                var forecastRainIconElement = document.createElement("i");
+        var forecastStatusIconElement = document.createElement("i");
 
-                                    forecastRainIconElement.className = "fas fa-cloud-rain";
-                                    
-                                forecastDataBlockElement2.appendChild(forecastRainIconElement);
-                                forecastDataBlockElement2.appendChild(document.createTextNode('\xa0'));
+        switch (day.icon) {
+            case "clear-day":
+                forecastStatusIconElement.className = "fas fa-sun";
+                break;
+            case "clear-night":
+                forecastStatusIconElement.className = "fas fa-moon";
+                break;
+            case "rain":
+                forecastStatusIconElement.className = "fas fa-cloud-rain";
+                break;
+            case "snow":
+                forecastStatusIconElement.className = "fas fa-snowflake";
+                break;
+            case "sleet":
+                forecastStatusIconElement.className = "fas fa-snowflake";
+                break;
+            case "wind":
+                forecastStatusIconElement.className = "fas fa-wind";
+                break;
+            case "fog":
+                forecastStatusIconElement.className = "fas fa-smog";
+                break;
+            case "cloudy":
+                forecastStatusIconElement.className = "fas fa-sun";
+                break;
+            case "partly-cloudy-day":
+                forecastStatusIconElement.className = "fas fa-cloud-sun";
+                break;
+            case "partly-cloudy-night":
+                forecastStatusIconElement.className = "fas fa-cloud";
+                break;
+        }
 
-                            forecastNumbersElement.appendChild(forecastDataBlockElement2);
-                    }
 
-                    forecastLeftElement.appendChild(forecastNumbersElement);
 
-                forecastRowElement.appendChild(forecastLeftElement);
+        forecastDataBlockElement2.appendChild(forecastStatusIconElement);
+        //forecastDataBlockElement2.appendChild(document.createTextNode('\xa0'));
 
-                var forecastRightElement = document.createElement("div");
-                forecastRightElement.className = "forecastRight";
+        forecastNumbersElement.appendChild(forecastDataBlockElement2);
 
-                    var forecastSummaryElement = document.createElement("div");
-                    forecastSummaryElement.appendChild(document.createTextNode(day.summary));
-                    forecastRightElement.appendChild(forecastSummaryElement);
 
-                forecastRowElement.appendChild(forecastRightElement);
+        forecastLeftElement.appendChild(forecastNumbersElement);
 
-            forecastElement.appendChild(forecastRowElement);
+        forecastRowElement.appendChild(forecastLeftElement);
+
+        var forecastRightElement = document.createElement("div");
+        forecastRightElement.className = "forecastRight";
+
+        var forecastSummaryElement = document.createElement("div");
+        forecastSummaryElement.appendChild(document.createTextNode(day.summary));
+        forecastRightElement.appendChild(forecastSummaryElement);
+
+        forecastRowElement.appendChild(forecastRightElement);
+
+        forecastElement.appendChild(forecastRowElement);
 
     })
 
-    if(forecastOpened === false){
+    if (forecastOpened === false) {
         forecastElement.style.display = "flex";
         forecastOpened = true;
     } else {

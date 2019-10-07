@@ -135,6 +135,10 @@ hr {
     text-align: center;
 }
 
+.weather-details {
+    display: none;
+}
+
 .footer {
     text-align: center;
     width: 100%;
@@ -167,7 +171,7 @@ hr {
     font-size: 24px;
 }
 
-.controls{
+.controls {
     display: none;
     margin-bottom: 10px;
 }
@@ -195,7 +199,7 @@ hr {
 }
 
 .forecastRow {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 5px;
     padding: 5px 5px 5px 5px;
     display: flex;
@@ -238,8 +242,7 @@ hr {
     font-size: 15px;
 }
 
-.forecastDataBlock i{
-}
+.forecastDataBlock i {}
 
 
 /*Mobile Styling */
@@ -264,20 +267,15 @@ hr {
     .footer {
         font-size: 12px;
     }
-    
     .forecastDay {
         font-size: 14px;
     }
-
     .forecastDataBlock {
         font-size: 10px;
     }
-
-
-    .forecastRight div{
+    .forecastRight div {
         font-size: 12px;
     }
-    
 }
 
 ::-webkit-input-placeholder {
