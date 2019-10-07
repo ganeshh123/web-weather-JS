@@ -242,7 +242,7 @@ function renderWeeklyForecast(data){
                                 forecastTemperatureIconElement.className = "fas fa-thermometer-half";
 
                             forecastDataBlockElement.appendChild(forecastTemperatureIconElement);
-                            forecastDataBlockElement.appendChild(document.createTextNode('\xa0' + Math.round((day.temperatureLow + day.temperatureHigh)/2) + ' ℃'));
+                            forecastDataBlockElement.appendChild(document.createTextNode('\xa0' + Math.round(day.temperatureHigh) + ' ℃'));
 
                         forecastNumbersElement.appendChild(forecastDataBlockElement);
 
