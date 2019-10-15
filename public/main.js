@@ -205,7 +205,6 @@ function renderWeeklyForecast(data) {
     daily = data.daily.data;
 
     //console.log(daily);
-    console.log(forecastOpened);
     forecastElement.innerHTML = '';
     let dayCounter = 0;
     daily.forEach(function(day) {
@@ -219,7 +218,6 @@ function renderWeeklyForecast(data) {
 
         var forecastDayElement = document.createElement("div");
         forecastDayElement.className = "forecastDay";
-        console.log(dayCounter);
         if (dayCounter == 0) {
             forecastDayElement.appendChild(document.createTextNode("Today"));
             dayCounter++;
