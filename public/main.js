@@ -261,6 +261,7 @@ function renderWeeklyForecast(data) {
         forecastDataBlockElement2.className = "forecastDataBlock";
 
         var forecastStatusIconElement = document.createElement("i");
+        forecastStatusIconElement.style.fontSize = "25px";
 
         switch (day.icon) {
             case "clear-day":

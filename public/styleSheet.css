@@ -182,6 +182,7 @@ hr {
     border-radius: 5px;
     font-size: 30px;
     padding: 5px 10px 5px 10px;
+    cursor: pointer;
 }
 
 
@@ -267,15 +268,57 @@ hr {
     .footer {
         font-size: 12px;
     }
+    /* Forecast Mobile */
+    #forecast {
+        width: 99%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 10px;
+        display: none;
+    }
+    .forecastRow {
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 5px;
+        padding: 2px 5px 2px 5px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        width: 100%;
+        margin: 5px 0px 5px 0px;
+    }
+    .forecastLeft,
+    .forecastRight {
+        width: 50%;
+    }
+    .forecastRight {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 71px;
+    }
     .forecastDay {
-        font-size: 14px;
+        font-size: 20px;
+    }
+    .forecastNumbers {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .forecastDataBlock {
-        font-size: 10px;
+        background-color: rgba(0, 0, 0, 0.75);
+        color: #ffffff;
+        padding: 5px 5px 5px 5px;
+        border-radius: 5px;
+        font-size: 18px;
+        margin: 2px 5px 2px 5px;
+        font-size: 15px;
     }
-    .forecastRight div {
-        font-size: 12px;
-    }
+    .forecastDataBlock i {}
 }
 
 ::-webkit-input-placeholder {
