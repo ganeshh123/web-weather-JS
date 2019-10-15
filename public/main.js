@@ -117,6 +117,17 @@ function setWeatherData(data, place) {
             break;
     }
 
+    // Extra background setting
+
+    if (currently.windSpeed > 30) {
+        document.body.style.background = "url('img/wind.jpg')";
+    }
+
+    if (currently.temperature < -3) {
+        document.body.style.background = "url('img/snow.jpg')";
+    }
+
+
     document.body.style.backgroundSize = "100% 100%";
 
     if (data.alerts != null) {
@@ -241,7 +252,7 @@ function renderWeeklyForecast(data) {
         forecastTemperatureIconElement.className = "fas fa-thermometer-half";
 
         forecastDataBlockElement.appendChild(forecastTemperatureIconElement);
-        forecastDataBlockElement.appendChild(document.createTextNode('\xa0' + Math.round(day.temperatureHigh) + ' ℃'));
+        forecastDataBlockElement.appendChild(document.createTextNode('\xa0' + Math.round(day.temperatureLow) + '-' + Math.round(day.temperatureHigh) + ' ℃'));
 
         forecastNumbersElement.appendChild(forecastDataBlockElement);
 
@@ -283,7 +294,6 @@ function renderWeeklyForecast(data) {
                 forecastStatusIconElement.className = "fas fa-cloud";
                 break;
         }
-
 
 
         forecastDataBlockElement2.appendChild(forecastStatusIconElement);
