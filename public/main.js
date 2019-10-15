@@ -128,7 +128,7 @@ function setWeatherData(data, place) {
     }
 
 
-    document.body.style.backgroundSize = "100% 100%";
+    //document.body.style.backgroundSize = "100% 100%";
 
     if (data.alerts != null) {
         console.log(data.alerts[0].title);
