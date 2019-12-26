@@ -42,41 +42,7 @@ searchBox.addListener('places_changed', () => {
         setWeatherData(data, place)
     })
 
-    setInterval(function(){
-
-        const latitude = place.geometry.location.lat()
-        const longitude = place.geometry.location.lng()
-
-        fetch('/time', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                latitude: latitude,
-                longitude: longitude
-            })
-        }).then(res => res.json()).then(data => {
-            timeData = data;
-            console.log(timeData)
-            setTimeData(timeData)
-        })
-        fetch('/weather', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                latitude: latitude,
-                longitude: longitude
-            })
-        }).then(res => res.json()).then(data => {
-            console.log(data)
-            setWeatherData(data, place)
-        })
-      }, 30000);
+   
 })
 
 // Objects for all the elements
