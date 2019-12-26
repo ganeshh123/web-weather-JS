@@ -43,6 +43,10 @@ searchBox.addListener('places_changed', () => {
     })
 
     setInterval(function(){
+
+        const latitude = place.geometry.location.lat()
+        const longitude = place.geometry.location.lng()
+
         fetch('/time', {
             method: 'POST',
             headers: {

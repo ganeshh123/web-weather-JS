@@ -135,6 +135,10 @@ hr {
     text-align: center;
 }
 
+.location{
+    width: 90%;
+}
+
 .weather-details {
     display: none;
 }
